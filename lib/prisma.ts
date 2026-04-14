@@ -1,19 +1,11 @@
-// Simple in-memory database using JSON
-export const db = {
-  posts: [] as any[],
-  
-  async getPosts() {
-    return this.posts;
-  },
-  
-  async getPostById(id: string) {
-    return this.posts.find((p) => p.id === id);
-  },
-  
-  async createPost(data: any) {
-    const post = { ...data, id: Date.now().toString(), createdAt: new Date(), updatedAt: new Date() };
-    this.posts.push(post);
-    return post;
-  },
+import { PrismaClient } from '@prisma/client';
+
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined;
 };
 
+export const prisma = globalForPrisma.prisma ?? new PrismaClient();
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+
+export default prisma;
