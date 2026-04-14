@@ -6,29 +6,30 @@ import Header from '@/components/Header';
 import HeroBanner from '@/components/HeroBanner';
 import SeriesCard, { SeriesCardSkeleton } from '@/components/SeriesCard';
 
-// Mock data
+// Mock data - Shinigami Scans style
 const featuredSeries = {
   id: 1,
   title: "Solo Leveling",
-  description: "Sung Jin-Woo, the weakest hunter of all mankind, finds himself trapped within a double dungeon. After a near-death experience, he gains the unique ability to level up, transforming from the weakest hunter to humanity's greatest weapon.",
-  chapter: "Chapter 179",
+  image: "/images/solo-leveling.jpg",
+  description: "In a world where hunters, humans who possess magical abilities, must battle deadly monsters to protect the human race from certain annihilation, a notoriously weak hunter named Sung Jinwoo finds himself in a never-ending struggle for survival.",
   rating: 4.9,
-  views: "2.3M"
+  chapters: 179,
+  genre: ["Action", "Fantasy", "Adventure"]
 };
 
 const trendingSeries = [
-  { id: 1, title: "Solo Leveling", rating: 4.9, chapters: 179, genre: "Action", views: "2.3M", status: 'Completed' },
-  { id: 2, title: "Tower of God", rating: 4.8, chapters: 590, genre: "Fantasy", views: "3.1M", status: 'Ongoing' },
-  { id: 3, title: "The Beginning After The End", rating: 4.9, chapters: 198, genre: "Fantasy", views: "1.8M", status: 'Ongoing' },
-  { id: 4, title: "Omniscient Reader", rating: 4.8, chapters: 201, genre: "Action", views: "2.7M", status: 'Ongoing' },
-  { id: 5, title: "Lookism", rating: 4.7, chapters: 478, genre: "Drama", views: "1.5M", status: 'Ongoing' },
-  { id: 6, title: "Nano Machine", rating: 4.8, chapters: 156, genre: "Action", views: "1.2M", status: 'Ongoing' },
-  { id: 7, title: "The Breaker", rating: 4.6, chapters: 72, genre: "Action", views: "980K", status: 'Completed' },
-  { id: 8, title: "Wind Breaker", rating: 4.7, chapters: 445, genre: "Sports", views: "1.1M", status: 'Ongoing' },
-  { id: 9, title: "Noblesse", rating: 4.5, chapters: 544, genre: "Supernatural", views: "2.1M", status: 'Completed' },
-  { id: 10, title: "Hardcore Leveling Warrior", rating: 4.6, chapters: 329, genre: "Action", views: "1.6M", status: 'Ongoing' },
-  { id: 11, title: "God of High School", rating: 4.7, chapters: 569, genre: "Action", views: "2.9M", status: 'Ongoing' },
-  { id: 12, title: "Weak Hero", rating: 4.8, chapters: 285, genre: "Drama", views: "1.4M", status: 'Ongoing' },
+  { id: 1, title: "Solo Leveling", chapters: 179, rating: 4.9, views: "2.3M", genre: "Action", status: 'Completed' as const },
+  { id: 2, title: "Tower of God", chapters: 590, rating: 4.8, views: "3.1M", genre: "Fantasy", status: 'Ongoing' as const },
+  { id: 3, title: "The Beginning After The End", chapters: 198, rating: 4.9, views: "1.8M", genre: "Fantasy", status: 'Ongoing' as const },
+  { id: 4, title: "Omniscient Reader", chapters: 201, rating: 4.8, views: "2.7M", genre: "Action", status: 'Ongoing' as const },
+  { id: 5, title: "Lookism", chapters: 478, rating: 4.7, views: "1.5M", genre: "Drama", status: 'Ongoing' as const },
+  { id: 6, title: "Nano Machine", chapters: 156, rating: 4.8, views: "1.2M", genre: "Action", status: 'Ongoing' as const },
+  { id: 7, title: "The Breaker: New Waves", chapters: 204, rating: 4.6, views: "980K", genre: "Action", status: 'Completed' as const },
+  { id: 8, title: "Wind Breaker", chapters: 445, rating: 4.7, views: "1.1M", genre: "Sports", status: 'Ongoing' as const },
+  { id: 9, title: "Noblesse", chapters: 544, rating: 4.5, views: "2.1M", genre: "Supernatural", status: 'Completed' as const },
+  { id: 10, title: "Hardcore Leveling Warrior", chapters: 329, rating: 4.6, views: "1.6M", genre: "Action", status: 'Ongoing' as const },
+  { id: 11, title: "God of High School", chapters: 569, rating: 4.7, views: "2.9M", genre: "Action", status: 'Ongoing' as const },
+  { id: 12, title: "Weak Hero", chapters: 285, rating: 4.8, views: "1.4M", genre: "Drama", status: 'Ongoing' as const },
 ];
 
 const latestUpdates = [
@@ -37,6 +38,14 @@ const latestUpdates = [
   { id: 3, series: "Omniscient Reader", chapter: "Chapter 201", time: "30 min ago" },
   { id: 4, series: "Tower of God", chapter: "Chapter 590", time: "1 hour ago" },
   { id: 5, series: "Lookism", chapter: "Chapter 478", time: "2 hours ago" },
+  { id: 6, series: "Nano Machine", chapter: "Chapter 156", time: "3 hours ago" },
+];
+
+const recommendedSeries = [
+  { id: 13, title: "Eleceed", chapters: 280, rating: 4.8, views: "1.9M", genre: "Action", status: 'Ongoing' as const },
+  { id: 14, title: "The God of High School", chapters: 520, rating: 4.6, views: "1.7M", genre: "Action", status: 'Ongoing' as const },
+  { id: 15, title: "True Beauty", chapters: 200, rating: 4.7, views: "2.2M", genre: "Romance", status: 'Completed' as const },
+  { id: 16, title: "Lore Olympus", chapters: 250, rating: 4.9, views: "3.5M", genre: "Romance", status: 'Ongoing' as const },
 ];
 
 export default function Home() {
@@ -48,36 +57,39 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
+    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
       {/* Header */}
       <Header />
 
-      {/* Hero Banner - Proper spacing */}
+      {/* Hero Banner */}
       <div className="pt-16">
         <HeroBanner featuredSeries={featuredSeries} />
       </div>
 
-      {/* Trending Section - Consistent spacing */}
-      <section className="py-16 bg-[var(--color-surface)]">
+      {/* Trending Now Section */}
+      <section className="py-16 bg-[var(--bg-secondary)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl shadow-lg shadow-orange-500/20">
+              <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl shadow-lg">
                 <span className="text-xl">🔥</span>
               </div>
-              <h2 className="text-2xl font-bold text-gray-100">Trending Now</h2>
+              <div>
+                <h2 className="text-2xl font-bold text-[var(--text-primary)]">Trending Now</h2>
+                <p className="text-sm text-[var(--text-muted)]">Most popular this week</p>
+              </div>
             </div>
             <Link 
               href="/browse" 
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-purple-400 bg-purple-500/10 border border-purple-500/20 rounded-lg hover:bg-purple-500/20 transition-colors duration-150"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-purple-400 bg-purple-500/10 border border-purple-500/20 rounded-lg hover:bg-purple-500/20 transition-colors"
             >
               <span>View All</span>
               <span>→</span>
             </Link>
           </div>
           
-          {/* Grid - Responsive */}
+          {/* Grid */}
           {loading ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6">
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(i => (
@@ -87,34 +99,34 @@ export default function Home() {
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6">
               {trendingSeries.map((series, index) => (
-                <SeriesCard key={series.id} series={series as import('@/types/series').FeaturedSeriesType} index={index} />
+                <SeriesCard key={series.id} series={series as any} index={index} />
               ))}
             </div>
           )}
         </div>
       </section>
 
-      {/* Latest Updates - Consistent spacing */}
-      <section className="py-16 bg-[var(--color-bg)]">
+      {/* Latest Updates Section */}
+      <section className="py-16 bg-[var(--bg-primary)]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="flex items-center gap-3 mb-8">
-            <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl shadow-lg shadow-indigo-500/20">
+            <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl shadow-lg">
               <span className="text-xl">🕐</span>
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-100">Latest Updates</h2>
-              <p className="text-sm text-gray-500 mt-0.5">New chapters uploaded daily</p>
+              <h2 className="text-2xl font-bold text-[var(--text-primary)]">Latest Updates</h2>
+              <p className="text-sm text-[var(--text-muted)]">New chapters daily</p>
             </div>
           </div>
           
-          {/* Card List */}
+          {/* List */}
           <div className="space-y-3">
             {latestUpdates.map((update, index) => (
               <Link
                 key={update.id}
                 href={`/series/${update.id}`}
-                className="flex items-center gap-4 p-4 rounded-xl bg-[var(--color-surface-elevated)] border border-[var(--color-border)] hover:border-purple-500/50 hover:bg-slate-800 transition-all duration-150 hover:scale-[1.01]"
+                className="flex items-center gap-4 p-4 bg-[var(--bg-card)] border border-[var(--border-primary)] rounded-xl hover:border-purple-500/50 hover:bg-[var(--bg-elevated)] transition-all duration-150 hover:scale-[1.01]"
               >
                 {/* Cover */}
                 <div className="w-20 h-28 rounded-lg bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-600 flex items-center justify-center text-3xl flex-shrink-0 shadow-md">
@@ -123,14 +135,14 @@ export default function Home() {
                 
                 {/* Info */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-gray-100 text-base mb-1 group-hover:text-purple-400 transition-colors duration-150">
+                  <h3 className="font-semibold text-[var(--text-primary)] text-base mb-1 group-hover:text-purple-400 transition-colors">
                     {update.series}
                   </h3>
-                  <p className="text-sm text-purple-400">{update.chapter}</p>
+                  <p className="text-sm text-purple-400 font-medium">{update.chapter}</p>
                 </div>
                 
                 {/* Time */}
-                <div className="flex items-center gap-2 text-sm text-gray-500">
+                <div className="flex items-center gap-2 text-sm text-[var(--text-muted)] flex-shrink-0">
                   <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                   <span className="font-medium">{update.time}</span>
                 </div>
@@ -142,7 +154,7 @@ export default function Home() {
           <div className="mt-6 text-center">
             <Link 
               href="/latest" 
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-purple-400 bg-purple-500/10 border border-purple-500/20 rounded-lg hover:bg-purple-500/20 transition-colors duration-150"
+              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-purple-400 bg-purple-500/10 border border-purple-500/20 rounded-lg hover:bg-purple-500/20 transition-colors"
             >
               <span>View All Updates</span>
               <span>→</span>
@@ -151,37 +163,72 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-[var(--color-surface)]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-8 md:p-12 text-center shadow-xl">
-            <div className="relative">
-              <h2 className="text-3xl font-bold text-white mb-3">Start Reading Now!</h2>
-              <p className="text-base md:text-lg text-white/90 mb-6 max-w-lg mx-auto">
-                Join thousands of readers enjoying the best manhua and manhwa content.
-              </p>
-              <button className="px-8 py-4 bg-white text-purple-600 font-semibold rounded-lg hover:shadow-2xl hover:scale-105 transition-all duration-150">
-                Get Started Free
-              </button>
+      {/* Recommended Section */}
+      <section className="py-16 bg-[var(--bg-secondary)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl shadow-lg">
+              <span className="text-xl">💡</span>
             </div>
+            <div>
+              <h2 className="text-2xl font-bold text-[var(--text-primary)]">Recommended For You</h2>
+              <p className="text-sm text-[var(--text-muted)]">Based on your reading history</p>
+            </div>
+          </div>
+          
+          {/* Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {recommendedSeries.map((series, index) => (
+              <SeriesCard key={series.id} series={series as any} index={index} />
+            ))}
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-[var(--color-surface)] border-t border-[var(--color-border)]">
+      <footer className="py-12 bg-[var(--bg-primary)] border-t border-[var(--border-primary)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-md">
-              <span className="text-lg">⚡</span>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Logo & Brand */}
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
+                <span className="text-xl">⚡</span>
+              </div>
+              <div>
+                <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  Shinigami Scans
+                </span>
+                <div className="text-xs text-[var(--text-muted)] font-medium">Professional Scanslation</div>
+              </div>
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Shinigami Reader
-            </span>
+            
+            {/* Links */}
+            <div className="flex flex-wrap justify-center gap-6 text-sm">
+              <Link href="#" className="text-[var(--text-secondary)] hover:text-purple-400 transition-colors">Home</Link>
+              <Link href="#" className="text-[var(--text-secondary)] hover:text-purple-400 transition-colors">Browse</Link>
+              <Link href="#" className="text-[var(--text-secondary)] hover:text-purple-400 transition-colors">Schedule</Link>
+              <Link href="#" className="text-[var(--text-secondary)] hover:text-purple-400 transition-colors">About</Link>
+            </div>
+            
+            {/* Social */}
+            <div className="flex items-center gap-4">
+              <button className="w-10 h-10 bg-[var(--bg-card)] border border-[var(--border-primary)] rounded-lg flex items-center justify-center text-[var(--text-secondary)] hover:text-purple-400 hover:border-purple-500/50 transition-all">
+                <span>💬</span>
+              </button>
+              <button className="w-10 h-10 bg-[var(--bg-card)] border border-[var(--border-primary)] rounded-lg flex items-center justify-center text-[var(--text-secondary)] hover:text-purple-400 hover:border-purple-500/50 transition-all">
+                <span>🐦</span>
+              </button>
+              <button className="w-10 h-10 bg-[var(--bg-card)] border border-[var(--border-primary)] rounded-lg flex items-center justify-center text-[var(--text-secondary)] hover:text-purple-400 hover:border-purple-500/50 transition-all">
+                <span>📷</span>
+              </button>
+            </div>
           </div>
-          <p className="text-center text-sm text-gray-500">
-            © 2024 Shinigami Reader. Built with ❤️ using Next.js & Tailwind CSS
-          </p>
+          
+          {/* Copyright */}
+          <div className="mt-8 pt-6 border-t border-[var(--border-primary)] text-center text-sm text-[var(--text-muted)]">
+            <p>© 2024 Shinigami Scans. All rights reserved. Built with ❤️ using Next.js & Tailwind CSS</p>
+          </div>
         </div>
       </footer>
     </div>

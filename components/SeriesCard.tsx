@@ -6,62 +6,78 @@ interface CardProps {
   series: {
     id: number;
     title: string;
+    image?: string;
     chapters: number;
     rating: number;
     views: string;
     genre: string;
     status: 'Ongoing' | 'Completed' | 'Hiatus';
+    updatedAt?: string;
   };
   index?: number;
 }
 
 export default function SeriesCard({ series, index = 0 }: CardProps) {
+  const delayStyle = { animationDelay: `${index * 50}ms` };
+
   return (
     <Link href={`/series/${series.id}`} className="group">
-      {/* Card Container - Proper shadow & border */}
-      <div className="relative aspect-[2/3] overflow-hidden bg-slate-800 rounded-xl border border-slate-700 shadow-md group-hover:shadow-xl transition-all duration-200 group-hover:-translate-y-1">
-        
-        {/* Background Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 opacity-100 group-hover:opacity-90 transition-opacity duration-200"></div>
-        
-        {/* Rating Badge - Position & style */}
-        <div className="absolute top-3 left-3 z-20 bg-yellow-500 px-2.5 py-1.5 rounded-lg text-white text-xs font-bold shadow-lg flex items-center gap-1">
-          <span>⭐</span>
+      <div 
+        className="relative aspect-[2/3] bg-[var(--bg-card)] rounded-xl overflow-hidden border border-[var(--border-primary)] shadow-md group-hover:shadow-xl group-hover:border-purple-500/50 transition-all duration-200 group-hover:-translate-y-1"
+        style={delayStyle}
+      >
+        {/* Status Badge */}
+        {series.status === 'Ongoing' && (
+          <div className="absolute top-3 left-3 z-20 px-2 py-1 bg-green-500/90 backdrop-blur-sm rounded-md text-xs font-semibold text-white shadow-lg">
+            Ongoing
+          </div>
+        )}
+        {series.status === 'Completed' && (
+          <div className="absolute top-3 left-3 z-20 px-2 py-1 bg-purple-500/90 backdrop-blur-sm rounded-md text-xs font-semibold text-white shadow-lg">
+            Completed
+          </div>
+        )}
+
+        {/* Rating Badge */}
+        <div className="absolute top-3 right-3 z-20 bg-[var(--bg-elevated)]/90 backdrop-blur-sm px-2 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 border border-[var(--border-primary)]">
+          <span className="text-yellow-400">⭐</span>
           <span>{series.rating}</span>
         </div>
 
-        {/* Status Badge */}
-        <div className="absolute top-3 right-3 z-20 bg-green-500/90 backdrop-blur-sm px-2.5 py-1.5 rounded-full text-xs font-medium text-white shadow-lg">
-          {series.status}
-        </div>
-
+        {/* Background Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 via-purple-600/20 to-pink-600/20 group-hover:scale-110 transition-transform duration-700"></div>
+        
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent"></div>
 
         {/* Content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-end p-4 text-center">
-          {/* Title - Proper typography */}
-          <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2 group-hover:text-purple-300 transition-colors duration-150 w-full">
+        <div className="absolute inset-0 flex flex-col justify-end p-4">
+          {/* Title */}
+          <h3 className="font-semibold text-white text-sm mb-3 line-clamp-2 group-hover:text-purple-400 transition-colors duration-150 leading-tight">
             {series.title}
           </h3>
           
-          {/* Meta Info - Spaced properly */}
-          <div className="flex items-center gap-2 text-xs text-gray-300">
-            <span className="flex items-center gap-1 px-2 py-1 bg-white/10 rounded-md backdrop-blur-sm">
+          {/* Meta Info */}
+          <div className="flex items-center justify-between text-xs text-[var(--text-muted)]">
+            <span className="flex items-center gap-1">
               <span>📖</span>
-              <span>{series.chapters}</span>
+              <span className="font-medium text-[var(--text-secondary)]">{series.chapters}</span>
             </span>
-            <span className="flex items-center gap-1 px-2 py-1 bg-white/10 rounded-md backdrop-blur-sm">
+            <span className="flex items-center gap-1">
               <span>👁</span>
               <span>{series.views}</span>
             </span>
           </div>
 
-          {/* Action Button - Appears on hover */}
-          <div className="mt-3 w-10 h-10 bg-purple-500/80 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-150 transform group-hover:scale-110">
-            <span className="text-white text-lg">📖</span>
+          {/* Latest Chapter */}
+          <div className="mt-3 pt-3 border-t border-[var(--border-primary)]">
+            <div className="text-xs text-[var(--text-secondary)]">Latest</div>
+            <div className="text-sm font-semibold text-purple-400">Chapter {series.chapters}</div>
           </div>
         </div>
+
+        {/* Hover Overlay */}
+        <div className="absolute inset-0 bg-purple-500/0 group-hover:bg-purple-500/10 transition-colors duration-200"></div>
       </div>
     </Link>
   );
@@ -70,8 +86,8 @@ export default function SeriesCard({ series, index = 0 }: CardProps) {
 // Skeleton Loading Component
 export function SeriesCardSkeleton() {
   return (
-    <div className="aspect-[2/3] bg-slate-800 rounded-xl border border-slate-700 animate-pulse">
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-700/50 to-slate-600/50 rounded-xl"></div>
+    <div className="aspect-[2/3] bg-[var(--bg-card)] rounded-xl border border-[var(--border-primary)] animate-pulse overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg-elevated)]/50 to-[var(--bg-elevated)]/30 rounded-xl"></div>
     </div>
   );
 }
@@ -85,7 +101,4 @@ export function SeriesCardSkeleton() {
   .animate-fade-in-up {
     animation: fade-in-up 0.3s var(--ease-out-quart) both;
   }
-  .delay-100 { animation-delay: 100ms; }
-  .delay-200 { animation-delay: 200ms; }
-  .delay-300 { animation-delay: 300ms; }
 `}</style>
