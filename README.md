@@ -1,210 +1,168 @@
-# Shinigami Reader - Manhua/Manhwa Platform
+# Shinigami Reader - Full Stack
 
-## 🎨 About
+Modern manhwa/manga reading platform with admin panel.
 
-Modern manhua/manhwa reading platform inspired by Shinigami Scans and other scanning groups. Built with Next.js 16, Tailwind CSS, and Prisma.
+## Tech Stack
 
-## ✨ Features
+- **Frontend:** React.js + React Router + Tailwind CSS
+- **Backend:** Express.js + Node.js
+- **Database:** PostgreSQL (via Prisma ORM)
+- **Authentication:** JWT + bcrypt
 
-- **Latest Updates** - Chronological chapter updates
-- **Browse Series** - Grid layout with genre filters
-- **Series Details** - Synopsis, stats, chapter list
-- **Chapter Reader** - Smooth page-by-page reading
-- **Responsive Design** - Works on desktop & mobile
-- **Dark Theme** - Eye-friendly purple/gray color scheme
+## Getting Started
 
-## 🚀 Quick Start
+### Prerequisites
+
+- Node.js 18+
+- PostgreSQL
+- npm or yarn
+
+### Installation
+
+```bash
+# Install root dependencies
+npm install
+
+# Install client and server dependencies
+npm run install-all
+```
+
+### Environment Setup
+
+Create `.env` files:
+
+**Server (`server/.env`):**
+```env
+DATABASE_URL="postgresql://user:password@localhost:5432/shinigami?schema=public"
+JWT_SECRET="your-secret-key-change-in-production"
+PORT=5000
+NODE_ENV=development
+```
+
+**Client (`client/.env`):**
+```env
+REACT_APP_API_URL=http://localhost:5000/api
+NODE_ENV=development
+```
+
+### Database Setup
+
+```bash
+# Push Prisma schema to database
+npm run db:push
+
+# Or use Prisma Studio
+npm run db:studio
+```
 
 ### Development
+
 ```bash
-cd shinigami-reader
+# Start both server and client
 npm run dev
-# Open http://localhost:3000
+
+# Or start separately
+npm run server  # Backend (Port 5000)
+npm run client  # Frontend (Port 3000)
 ```
 
 ### Production Build
+
 ```bash
-npm run build
-npm start
+# Build client
+npm run build:client
+
+# Build server
+npm run build:server
+
+# Start server only (client served statically)
+cd server && npm start
 ```
 
-## 🎨 Color Customization
-
-### Change Colors (Purple Theme)
-
-**File:** `app/globals.css`
-
-```css
-:root {
-  --background: #111827;     /* Dark gray bg */
-  --foreground: #f9fafb;     /* Light text */
-  --purple: #a855f7;         /* Purple accent */
-  --purple-light: #c084fc;   /* Light purple */
-  --purple-dark: #7c3aed;    /* Dark purple */
-}
-```
-
-### To Change Colors:
-
-**Option 1: Blue Theme**
-```css
---purple: #3b82f6;
---purple-light: #60a5fa;
---purple-dark: #2563eb;
-```
-
-**Option 2: Green Theme**
-```css
---purple: #10b981;
---purple-light: #34d399;
---purple-dark: #059669;
-```
-
-**Option 3: Red Theme**
-```css
---purple: #ef4444;
---purple-light: #f87171;
---purple-dark: #dc2626;
-```
-
-**Option 4: Pink Theme**
-```css
---purple: #ec4899;
---purple-light: #f472b6;
---purple-dark: #db2777;
-```
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 shinigami-reader/
-├── app/
-│   ├── components/
-│   │   └── Header.tsx      # Navigation header
-│   ├── browse/
-│   │   └── page.tsx        # Browse page with genres
-│   ├── latest/
-│   │   └── page.tsx        # Latest updates list
-│   ├── read/
-│   │   └── page.tsx        # Chapter reader
-│   ├── series/
-│   │   └── [id]/
-│   │       └── page.tsx    # Series detail page
-│   ├── globals.css         # Global styles & colors
-│   ├── layout.tsx          # Root layout
-│   └── page.tsx            # Home page
-├── lib/
-│   └── prisma.ts           # Database utilities
-├── prisma/
-│   ├── schema.prisma       # Database schema
-│   └── dev.db              # SQLite database
-└── package.json
+├── client/                 # React frontend
+│   ├── public/
+│   ├── src/
+│   │   ├── api.js         # API client
+│   │   ├── App.js         # Main app component
+│   │   ├── components/    # Reusable components
+│   │   ├── pages/         # Page components
+│   │   └── index.js       # Entry point
+│   └── package.json
+├── server/                 # Express backend
+│   ├── prisma/
+│   │   └── schema.prisma  # Database schema
+│   ├── routes/            # API routes
+│   ├── lib/               # Libraries & utilities
+│   ├── src/
+│   │   └── index.js       # Server entry
+│   └── package.json
+├── package.json           # Root package.json
+└── README.md
 ```
 
-## 🔧 Tech Stack
+## API Endpoints
 
-- **Frontend:** Next.js 16 (App Router)
-- **Styling:** Tailwind CSS
-- **Database:** SQLite (Prisma ORM)
-- **Authentication:** Ready for NextAuth.js
-- **Hosting:** Vercel
+### Public Routes
 
-## 📝 Pages
+- `GET /api/series` - Get all series (with pagination & filters)
+- `GET /api/series/:id` - Get series by ID
+- `GET /api/series/slug/:slug` - Get series by slug
+- `GET /api/chapters/series/:seriesId` - Get chapters by series
+- `GET /api/chapters/:id` - Get chapter with pages
 
-1. **Home** (`/`) - Hero section, popular series, latest updates
-2. **Browse** (`/browse`) - All series with genre filters
-3. **Latest** (`/latest`) - Chronological chapter updates
-4. **Series Detail** (`/series/[id]`) - Series info + chapter list
-5. **Reader** (`/read`) - Chapter page viewer
+### Admin Routes (Protected)
 
-## 🎯 Customization
+- `POST /api/admin/login` - Admin login
+- `POST /api/admin/register` - Register admin (first time only)
+- `GET /api/admin/settings` - Get site settings
+- `PUT /api/admin/settings` - Update site settings
 
-### Change Site Name
+### Series Management (Protected)
 
-**File:** `app/layout.tsx`
+- `POST /api/series` - Create series
+- `PUT /api/series/:id` - Update series
+- `DELETE /api/series/:id` - Delete series
 
-```typescript
-export const metadata: Metadata = {
-  title: "Your Platform Name - Read Manhua & Manhwa",
-  description: "Your custom description here",
-};
-```
+## Environment Variables
 
-### Add Real Content
+### Server
 
-Replace placeholder data with real API calls:
+- `DATABASE_URL` - PostgreSQL connection string
+- `JWT_SECRET` - JWT signing key
+- `PORT` - Server port (default: 5000)
 
-```typescript
-// Example: Fetch series from API
-async function getSeries() {
-  const res = await fetch('https://api.yourplatform.com/series');
-  return res.json();
-}
-```
+### Client
 
-### Deploy to Vercel
+- `REACT_APP_API_URL` - Backend API URL
+
+## Deployment
+
+### VPS Deployment
+
+1. Build both client and server
+2. Serve static files from Express
+3. Use PM2 or similar for process management
+4. Configure Nginx as reverse proxy
+
+### Docker Deployment
+
+Coming soon with Docker Compose setup.
+
+## Admin Credentials
+
+Default admin account should be created via:
 
 ```bash
-# Install Vercel CLI
-npm install -g vercel
-
-# Login
-vercel login
-
-# Deploy
-vercel --prod
+# Register admin endpoint (call once)
+curl -X POST http://localhost:5000/api/admin/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"admin@example.com","password":"admin123"}'
 ```
 
-## 📱 Mobile Responsive
+## License
 
-All pages are fully responsive with Tailwind breakpoints:
-- Mobile: < 768px
-- Tablet: 768px - 1024px  
-- Desktop: > 1024px
-
-## 🔐 Authentication Ready
-
-Add NextAuth.js for user accounts:
-
-```bash
-npm install next-auth
-```
-
-## 📊 Analytics
-
-Add Google Analytics or Plausible in `layout.tsx`:
-
-```typescript
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>
-        {/* Analytics script here */}
-        {children}
-      </body>
-    </html>
-  );
-}
-```
-
-## 🛠️ Development Tips
-
-1. **Hot Reload:** Changes auto-reflect in dev mode
-2. **Type Safety:** Full TypeScript support
-3. **Image Optimization:** Next.js Image component
-4. **SEO:** Metadata API for each page
-
-## 📚 Next Steps
-
-- [ ] Add user authentication
-- [ ] Implement real database
-- [ ] Add comment system
-- [ ] Add favorites/bookmarks
-- [ ] Add admin panel for uploads
-- [ ] Implement search functionality
-- [ ] Add notifications
-- [ ] Mobile app (React Native)
-
----
-
-**Built with ❤️ using Next.js & Tailwind CSS**
+MIT

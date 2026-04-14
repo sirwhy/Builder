@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Series {
+  id          Int            @id @default(autoincrement())
+  title       String
+  slug        String         @unique
+  description String?
+  cover       String?
+  author      String?
+  artist      String?
+  status      String         @default("Ongoing")
+  genres      String[]
+  rating      Float          @default(0)
+  views       Int            @default(0)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  
+  chapters    Chapter[]
+}
+
+model Chapter {
+  id          Int      @id @default(autoincrement())
+  seriesId    Int
+  title       String
+  chapterNum  Float
+  number      Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  series      Series   @relation(fields: [seriesId], references: [id], onDelete: Cascade)
+  pages       Page[]
+
+  @@index([seriesId])
+}
+
+model Page {
+  id        Int      @id @default(autoincrement())
+  chapterId Int
+  number    Int
+  imageUrl  String
+  order     Int
+  createdAt DateTime @default(now())
+
+  chapter   Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  @@index([chapterId])
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique @db.VarChar(255)
+  value     String
+  updatedAt DateTime @updatedAt
+
+  @@index([key])
+}

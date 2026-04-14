@@ -1,34 +1,19 @@
 {
   "name": "shinigami-reader",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Manhwa/Manga reading platform with admin panel",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push",
-    "db:studio": "prisma studio",
-    "db:migrate": "prisma migrate dev",
-    "seed": "node prisma/seed.js"
+    "client": "cd client && npm start",
+    "server": "cd server && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install-all": "cd client && npm install && cd ../server && npm install",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "db:push": "cd server && npx prisma db push",
+    "db:studio": "cd server && npx prisma studio"
   },
-  "dependencies": {
-    "@prisma/client": "^6.0.0",
-    "next": "16.0.0",
-    "next-auth": "^5.0.0-beta.25",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "sharp": "^0.33.5"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "autoprefixer": "^10.5.0",
-    "postcss": "^8.5.9",
-    "prisma": "^6.0.0",
-    "tailwindcss": "^3.4.19",
-    "typescript": "^5"
+    "concurrently": "^8.2.0"
   }
 }
