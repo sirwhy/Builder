@@ -1,112 +1,80 @@
 'use client';
 
-import Link from "next/link";
-
-interface HeroBannerProps {
-  featuredSeries: {
-    id: number;
-    title: string;
-    image: string;
-    description: string;
-    rating: number;
-    chapters: number;
-    genre: string[];
-  };
-}
-
-export default function HeroBanner({ featuredSeries }: HeroBannerProps) {
+export default function HeroBanner() {
   return (
-    <section className="relative w-full bg-gradient-to-br from-[var(--bg-secondary)] via-[var(--bg-primary)] to-[var(--bg-secondary)] overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-pink-500 rounded-full blur-3xl"></div>
+    <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden">
+      {/* Background Image with Gradient Overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1920&q=80')",
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/60 to-transparent"></div>
       </div>
 
-      {/* Content Container */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Text Content */}
-          <div className="space-y-6">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-purple-500/20 border border-purple-500/30 rounded-full text-xs font-semibold text-purple-400">
-              <span className="text-sm">🔥</span>
-              <span>Featured Series</span>
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+        <div className="max-w-2xl">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-purple-500/20 backdrop-blur-sm border border-purple-500/30 rounded-full mb-4">
+            <span className="text-xs font-semibold text-purple-300">🔥 TRENDING NOW</span>
+          </div>
+
+          {/* Title */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+            Solo Leveling
+          </h1>
+
+          {/* Meta Info */}
+          <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-slate-300">
+            <div className="flex items-center gap-1.5">
+              <span className="text-yellow-400">⭐</span>
+              <span className="font-semibold">4.9</span>
+              <span className="text-slate-500">(125K ratings)</span>
             </div>
-
-            {/* Title */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight bg-gradient-to-r from-white via-purple-100 to-pink-100 bg-clip-text text-transparent">
-              {featuredSeries.title}
-            </h1>
-
-            {/* Meta Info */}
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--bg-card)] border border-[var(--border-primary)] rounded-lg">
-                <span className="text-sm">⭐</span>
-                <span className="font-semibold text-sm">{featuredSeries.rating}</span>
-              </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--bg-card)] border border-[var(--border-primary)] rounded-lg">
-                <span className="text-sm">📖</span>
-                <span className="font-semibold text-sm">{featuredSeries.chapters} Chapters</span>
-              </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--bg-card)] border border-[var(--border-primary)] rounded-lg">
-                <span className="text-xs font-medium text-purple-400">{featuredSeries.genre[0]}</span>
-              </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-green-400">●</span>
+              <span>Ongoing</span>
             </div>
-
-            {/* Description */}
-            <p className="text-base leading-relaxed text-[var(--text-secondary)] max-w-xl">
-              {featuredSeries.description}
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href={`/series/${featuredSeries.id}`}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-purple-500/25 hover:scale-105 transition-all duration-150"
-              >
-                <span>Read Now</span>
-                <span>→</span>
-              </Link>
-              <button className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--bg-card)] border border-[var(--border-primary)] text-[var(--text-primary)] font-medium rounded-lg hover:bg-[var(--bg-elevated)] transition-colors">
-                <span>⭐</span>
-                <span>Add to Library</span>
-              </button>
+            <div className="flex items-center gap-1.5">
+              <span>📖</span>
+              <span>179 Chapters</span>
             </div>
           </div>
 
-          {/* Hero Card */}
-          <div className="relative">
-            <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-gradient-to-br from-purple-600 to-pink-600 shadow-2xl shadow-purple-500/20 group">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-9xl group-hover:scale-110 transition-transform duration-500 animate-float">📚</div>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-xs text-[var(--text-muted)] mb-1">Latest Chapter</div>
-                    <div className="text-xl font-bold text-white">Chapter 179</div>
-                  </div>
-                  <div className="px-3 py-1.5 bg-green-500 text-white text-xs font-semibold rounded-lg animate-pulse">
-                    NEW
-                  </div>
-                </div>
-              </div>
-            </div>
+          {/* Genre Tags */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {['Action', 'Adventure', 'Fantasy', 'Drama'].map((genre) => (
+              <span key={genre} className="px-3 py-1 bg-slate-800/80 backdrop-blur-sm border border-slate-700 rounded-full text-xs font-medium text-slate-300">
+                {genre}
+              </span>
+            ))}
+          </div>
+
+          {/* Description */}
+          <p className="text-slate-300 text-base md:text-lg mb-6 line-clamp-3">
+            In a world where hunters, humans who possess magical abilities, must battle deadly monsters to protect humanity from certain annihilation, a notoriously weak hunter named Sung Jinwoo finds himself in a seemingly endless struggle for survival.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap gap-3">
+            <button className="btn-primary flex items-center gap-2 px-6 py-3">
+              <span>📚</span>
+              <span className="font-semibold">Start Reading</span>
+              <span className="text-lg">→</span>
+            </button>
+            <button className="btn-secondary flex items-center gap-2 px-5 py-3">
+              <span>❤️</span>
+              <span className="font-medium">Add to Library</span>
+            </button>
           </div>
         </div>
       </div>
 
-      <style jsx global>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-16px); }
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-      `}</style>
-    </section>
+      {/* Animated Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-transparent opacity-50"></div>
+    </div>
   );
 }
