@@ -13,8 +13,7 @@ const featuredSeries = {
   description: "Sung Jin-Woo, the weakest hunter of all mankind, finds himself trapped within a double dungeon. After a near-death experience, he gains the unique ability to level up, transforming from the weakest hunter to humanity's greatest weapon.",
   chapter: "Chapter 179",
   rating: 4.9,
-  views: "2.3M",
-  gradient: "from-yellow-600 via-orange-600 to-red-700"
+  views: "2.3M"
 };
 
 const trendingSeries = [
@@ -44,47 +43,49 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000);
+    const timer = setTimeout(() => setLoading(false), 800);
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      {/* Header Component */}
+    <div className="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
+      {/* Header */}
       <Header />
 
-      {/* Hero Banner */}
-      <div className="pt-20">
+      {/* Hero Banner - Proper spacing */}
+      <div className="pt-16">
         <HeroBanner featuredSeries={featuredSeries} />
       </div>
 
-      {/* Trending Section */}
-      <section className="py-16 bg-gradient-to-b from-slate-900 to-slate-800">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between mb-10">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl shadow-lg shadow-orange-500/30">
-                <span className="text-2xl">🔥</span>
+      {/* Trending Section - Consistent spacing */}
+      <section className="py-16 bg-[var(--color-surface)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl shadow-lg shadow-orange-500/20">
+                <span className="text-xl">🔥</span>
               </div>
-              <div>
-                <h2 className="text-3xl font-bold text-white">Trending Now</h2>
-                <p className="text-sm text-gray-400 mt-1">Most popular series this week</p>
-              </div>
+              <h2 className="text-2xl font-bold text-gray-100">Trending Now</h2>
             </div>
-            <Link href="/browse" className="flex items-center gap-2 px-6 py-3 text-sm font-semibold text-purple-400 bg-purple-600/20 border border-purple-500/30 rounded-xl hover:bg-purple-600/30 transition-all duration-300">
+            <Link 
+              href="/browse" 
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-purple-400 bg-purple-500/10 border border-purple-500/20 rounded-lg hover:bg-purple-500/20 transition-colors duration-150"
+            >
               <span>View All</span>
               <span>→</span>
             </Link>
           </div>
           
+          {/* Grid - Responsive */}
           {loading ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6">
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(i => (
                 <SeriesCardSkeleton key={i} />
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6">
               {trendingSeries.map((series, index) => (
                 <SeriesCard key={series.id} series={series as import('@/types/series').FeaturedSeriesType} index={index} />
               ))}
@@ -93,44 +94,56 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Latest Updates */}
-      <section className="py-16 bg-gradient-to-b from-slate-800 to-slate-900">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="flex items-center gap-4 mb-10">
-            <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-lg shadow-indigo-500/30">
-              <span className="text-2xl">🕐</span>
+      {/* Latest Updates - Consistent spacing */}
+      <section className="py-16 bg-[var(--color-bg)]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl shadow-lg shadow-indigo-500/20">
+              <span className="text-xl">🕐</span>
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-white">Latest Updates</h2>
-              <p className="text-sm text-gray-400 mt-1">New chapters uploaded daily</p>
+              <h2 className="text-2xl font-bold text-gray-100">Latest Updates</h2>
+              <p className="text-sm text-gray-500 mt-0.5">New chapters uploaded daily</p>
             </div>
           </div>
           
-          <div className="space-y-4">
+          {/* Card List */}
+          <div className="space-y-3">
             {latestUpdates.map((update, index) => (
               <Link
                 key={update.id}
                 href={`/series/${update.id}`}
-                className="group flex items-center gap-5 p-6 rounded-2xl bg-gradient-to-r from-slate-700/50 to-slate-700/30 backdrop-blur-sm hover:bg-gradient-to-r hover:from-purple-600/20 hover:to-pink-600/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-500/10 border border-slate-600 hover:border-purple-500/50 animate-fade-in-up"
-                style={{ animationDelay: `${index * 80}ms` }}
+                className="flex items-center gap-4 p-4 rounded-xl bg-[var(--color-surface-elevated)] border border-[var(--color-border)] hover:border-purple-500/50 hover:bg-slate-800 transition-all duration-150 hover:scale-[1.01]"
               >
-                <div className="w-24 h-32 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-600 flex items-center justify-center text-4xl flex-shrink-0 shadow-xl shadow-purple-500/30 group-hover:scale-110 group-hover:rotate-2 transition-all duration-500">
+                {/* Cover */}
+                <div className="w-20 h-28 rounded-lg bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-600 flex items-center justify-center text-3xl flex-shrink-0 shadow-md">
                   📚
                 </div>
+                
+                {/* Info */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-white text-xl mb-2 group-hover:text-purple-400 transition-colors duration-300">{update.series}</h3>
-                  <p className="text-sm text-purple-400 font-semibold">{update.chapter}</p>
+                  <h3 className="font-semibold text-gray-100 text-base mb-1 group-hover:text-purple-400 transition-colors duration-150">
+                    {update.series}
+                  </h3>
+                  <p className="text-sm text-purple-400">{update.chapter}</p>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-gray-400 group-hover:text-pink-400 transition-colors duration-300">
-                  <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span>
+                
+                {/* Time */}
+                <div className="flex items-center gap-2 text-sm text-gray-500">
+                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                   <span className="font-medium">{update.time}</span>
                 </div>
               </Link>
             ))}
           </div>
 
-          <div className="mt-10 text-center">
-            <Link href="/latest" className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold text-purple-400 bg-purple-600/20 border border-purple-500/30 rounded-xl hover:bg-purple-600/30 hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
+          {/* View All CTA */}
+          <div className="mt-6 text-center">
+            <Link 
+              href="/latest" 
+              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-purple-400 bg-purple-500/10 border border-purple-500/20 rounded-lg hover:bg-purple-500/20 transition-colors duration-150"
+            >
               <span>View All Updates</span>
               <span>→</span>
             </Link>
@@ -139,18 +152,16 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-b from-slate-900 to-slate-800">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-12 text-center shadow-2xl shadow-purple-500/30">
-            <div className="absolute inset-0 bg-black/10"></div>
+      <section className="py-16 bg-[var(--color-surface)]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-8 md:p-12 text-center shadow-xl">
             <div className="relative">
-              <h2 className="text-4xl font-bold text-white mb-4">Start Reading Now!</h2>
-              <p className="text-lg text-white/90 mb-8 max-w-lg mx-auto">
+              <h2 className="text-3xl font-bold text-white mb-3">Start Reading Now!</h2>
+              <p className="text-base md:text-lg text-white/90 mb-6 max-w-lg mx-auto">
                 Join thousands of readers enjoying the best manhua and manhwa content.
               </p>
-              <button className="group px-10 py-5 bg-white text-purple-600 font-bold text-lg rounded-xl hover:shadow-2xl hover:scale-110 transition-all duration-300 flex items-center gap-3 mx-auto">
+              <button className="px-8 py-4 bg-white text-purple-600 font-semibold rounded-lg hover:shadow-2xl hover:scale-105 transition-all duration-150">
                 Get Started Free
-                <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
               </button>
             </div>
           </div>
@@ -158,39 +169,21 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 bg-slate-900 border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 rounded-2xl shadow-xl shadow-purple-500/30">
-                <span className="text-2xl">⚡</span>
-              </div>
-              <span className="text-3xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Shinigami Reader
-              </span>
+      <footer className="py-8 bg-[var(--color-surface)] border-t border-[var(--color-border)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-md">
+              <span className="text-lg">⚡</span>
             </div>
-            <p className="text-gray-400 text-sm mb-6">
-              © 2024 Shinigami Reader. Built with ❤️ using Next.js & Tailwind CSS
-            </p>
-            <div className="flex justify-center gap-8 text-sm">
-              <Link href="#" className="text-gray-400 hover:text-purple-400 transition-colors duration-300 hover:scale-110">Terms</Link>
-              <Link href="#" className="text-gray-400 hover:text-purple-400 transition-colors duration-300 hover:scale-110">Privacy</Link>
-              <Link href="#" className="text-gray-400 hover:text-purple-400 transition-colors duration-300 hover:scale-110">Contact</Link>
-            </div>
+            <span className="text-xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Shinigami Reader
+            </span>
           </div>
+          <p className="text-center text-sm text-gray-500">
+            © 2024 Shinigami Reader. Built with ❤️ using Next.js & Tailwind CSS
+          </p>
         </div>
       </footer>
-
-      {/* Custom Animations */}
-      <style jsx global>{`
-        @keyframes fade-in-up {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up {
-          animation: fade-in-up 0.6s ease-out backwards;
-        }
-      `}</style>
     </div>
   );
 }
