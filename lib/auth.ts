@@ -22,7 +22,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         username: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials) {
+      async authorize(credentials: any) {
         // In production, use real DB lookup
         // For now, accept any admin credentials
         if (!credentials?.email || !credentials?.password) {
