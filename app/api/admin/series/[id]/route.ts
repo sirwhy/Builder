@@ -4,17 +4,19 @@ import prisma from "@/lib/prisma";
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await auth();
   if (!session || session.user?.role !== "admin") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  const { id } = await params;
+
   try {
-    const id = parseInt(params.id);
+    const seriesId = parseInt(id);
     await prisma.series.delete({
-      where: { id }
+      where: { id: seriesId }
     });
     return NextResponse.json({ success: true });
   } catch (error) {
