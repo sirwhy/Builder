@@ -1,0 +1,22 @@
+// Prisma Schema for Shinigami Reader
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Post {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String?
+  coverImage  String?
+  author      String
+  views       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  published   Boolean  @default(false)
+}
