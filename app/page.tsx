@@ -39,7 +39,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)]">
+    <div className="min-h-screen bg-black text-white">
       {/* Header */}
       <Header />
 
@@ -54,7 +54,7 @@ export default function Home() {
               <h2 className="text-xl font-bold text-white">TRENDING NOW</h2>
               <Link 
                 href="/browse" 
-                className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-white bg-[var(--border-secondary)] rounded hover:bg-[var(--bg-card)] transition-colors"
+                className="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-white bg-gray-800 rounded hover:bg-gray-700 transition-colors"
               >
                 <span>VIEW ALL</span>
                 <span>→</span>
@@ -79,7 +79,7 @@ export default function Home() {
         </section>
 
         {/* Latest Updates Section */}
-        <section className="py-8 px-4 sm:px-6 lg:px-8 bg-[var(--bg-secondary)]">
+        <section className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-900">
           <div className="max-w-4xl mx-auto">
             {/* Section Header */}
             <h2 className="text-xl font-bold text-white mb-6">LATEST UPDATES</h2>
@@ -90,7 +90,7 @@ export default function Home() {
                 <Link
                   key={update.id}
                   href={`/series/${update.id}`}
-                  className="flex items-center gap-4 p-3 bg-[var(--bg-card)] hover:bg-[var(--border-secondary)] transition-colors rounded"
+                  className="flex items-center gap-4 p-3 bg-gray-800 hover:bg-gray-700 transition-colors rounded"
                 >
                   {/* Cover */}
                   <div className="w-16 h-24 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex items-center justify-center flex-shrink-0">
@@ -118,7 +118,7 @@ export default function Home() {
             <div className="mt-4 text-center">
               <Link 
                 href="/latest" 
-                className="inline-flex items-center gap-1 px-4 py-2 text-sm font-semibold text-white bg-[var(--border-secondary)] rounded hover:bg-[var(--bg-card)] transition-colors"
+                className="inline-flex items-center gap-1 px-4 py-2 text-sm font-semibold text-white bg-gray-800 rounded hover:bg-gray-700 transition-colors"
               >
                 <span>VIEW ALL</span>
                 <span>→</span>
@@ -130,7 +130,7 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="py-8 px-4 sm:px-6 lg:px-8 border-t border-[var(--border-primary)]">
+      <footer className="py-8 px-4 sm:px-6 lg:px-8 border-t border-gray-800">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Logo & Brand */}
@@ -143,13 +143,13 @@ export default function Home() {
             
             {/* Links */}
             <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <Link href="#" className="text-[var(--text-secondary)] hover:text-white transition-colors">Home</Link>
-              <Link href="#" className="text-[var(--text-secondary)] hover:text-white transition-colors">Browse</Link>
-              <Link href="#" className="text-[var(--text-secondary)] hover:text-white transition-colors">Schedule</Link>
+              <Link href="#" className="text-gray-400 hover:text-white transition-colors">Home</Link>
+              <Link href="#" className="text-gray-400 hover:text-white transition-colors">Browse</Link>
+              <Link href="#" className="text-gray-400 hover:text-white transition-colors">Schedule</Link>
             </div>
             
             {/* Copyright */}
-            <p className="text-sm text-[var(--text-muted)]">
+            <p className="text-sm text-gray-500">
               © 2024 Shinigami Scans
             </p>
           </div>

@@ -20,7 +20,7 @@ export default function Header() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-primary)] border-b border-[var(--border-primary)]">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
@@ -41,8 +41,8 @@ export default function Header() {
                 href={link.href}
                 className={`px-3 py-1.5 text-sm font-medium rounded transition-colors ${
                   isActive(link.href)
-                    ? 'text-white bg-[var(--border-secondary)]'
-                    : 'text-[var(--text-secondary)] hover:text-white'
+                    ? 'text-white bg-gray-800'
+                    : 'text-gray-400 hover:text-white'
                 }`}
               >
                 {link.label}
@@ -57,15 +57,15 @@ export default function Header() {
               <input
                 type="search"
                 placeholder="Search..."
-                className="w-56 px-3 py-1.5 bg-[var(--bg-secondary)] border border-[var(--border-primary)] rounded text-sm text-white placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent-primary)]"
+                className="w-56 px-3 py-1.5 bg-gray-900 border border-gray-800 rounded text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500"
               />
-              <svg className="absolute right-2.5 top-2 w-3.5 h-3.5 text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="absolute right-2.5 top-2.5 w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
             
             {/* Auth Buttons */}
-            <button className="px-3 py-1.5 text-sm font-medium text-[var(--text-secondary)] hover:text-white transition-colors">
+            <button className="px-3 py-1.5 text-sm font-medium text-gray-400 hover:text-white transition-colors">
               Login
             </button>
             <button className="px-4 py-1.5 text-sm font-semibold bg-white text-black rounded hover:bg-gray-200 transition-colors">
@@ -92,12 +92,12 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-3 border-t border-[var(--border-primary)]">
+          <div className="md:hidden py-3 border-t border-gray-800">
             <div className="mb-3">
               <input
                 type="search"
                 placeholder="Search..."
-                className="w-full px-3 py-2 bg-[var(--bg-secondary)] border border-[var(--border-primary)] rounded text-sm text-white"
+                className="w-full px-3 py-2 bg-gray-900 border border-gray-800 rounded text-sm text-white"
               />
             </div>
 
@@ -109,8 +109,8 @@ export default function Header() {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`px-3 py-2 text-sm font-medium rounded ${
                     isActive(link.href)
-                      ? 'text-white bg-[var(--border-secondary)]'
-                      : 'text-[var(--text-secondary)] hover:text-white'
+                      ? 'text-white bg-gray-800'
+                      : 'text-gray-400 hover:text-white'
                   }`}
                 >
                   {link.label}
@@ -118,8 +118,8 @@ export default function Header() {
               ))}
             </div>
 
-            <div className="flex flex-col gap-2 mt-3 pt-3 border-t border-[var(--border-primary)]">
-              <button className="w-full px-3 py-2 text-sm font-medium text-[var(--text-secondary)] text-left">
+            <div className="flex flex-col gap-2 mt-3 pt-3 border-t border-gray-800">
+              <button className="w-full px-3 py-2 text-sm font-medium text-gray-400 text-left">
                 Login
               </button>
               <button className="w-full px-3 py-2 text-sm font-semibold bg-white text-black rounded">
