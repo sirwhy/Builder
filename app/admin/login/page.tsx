@@ -2,7 +2,6 @@
 
 // Dynamic rendering - don't prerender admin pages
 export const dynamic = 'force-dynamic';
-export const revalidate = 0;
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";

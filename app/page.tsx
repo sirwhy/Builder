@@ -2,7 +2,6 @@
 
 // Dynamic rendering for better performance
 export const dynamic = 'force-dynamic';
-export const revalidate = 0;
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
