@@ -1,7 +1,14 @@
 // This file configures Next.js build behavior
-export default {
+const nextConfig = {
   output: 'standalone',
-  experimental: {
-    serverActions: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
 };
+
+module.exports = nextConfig;
