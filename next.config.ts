@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Ensure SSR for all routes
+  output: 'standalone',
+  transpilePackages: ['@prisma/client'],
 };
 
 export default nextConfig;
