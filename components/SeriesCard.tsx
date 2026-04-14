@@ -1,10 +1,17 @@
 'use client';
 
 import Link from "next/link";
-import { FeaturedSeriesType as SeriesCardType } from '@/types/series';
 
 interface CardProps {
-  series: SeriesCardType;
+  series: {
+    id: number;
+    title: string;
+    chapters: number;
+    rating: number;
+    views: string;
+    genre: string;
+    status: 'Ongoing' | 'Completed' | 'Hiatus';
+  };
   index?: number;
 }
 
@@ -14,17 +21,17 @@ export default function SeriesCard({ series, index = 0 }: CardProps) {
   return (
     <Link href={`/series/${series.id}`} className="group">
       <div 
-        className="relative aspect-[2/3] rounded-2xl overflow-hidden bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500 shadow-xl group-hover:shadow-2xl group-hover:shadow-purple-500/30 transition-all duration-500 hover:scale-105 hover:-translate-y-2 animate-fade-in-up"
+        className="relative aspect-[2/3] rounded-2xl overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 shadow-xl shadow-purple-500/30 group-hover:shadow-2xl group-hover:shadow-purple-500/50 transition-all duration-500 hover:scale-105 hover:-translate-y-2 animate-fade-in-up"
         style={delayStyle}
       >
         {/* Rating Badge */}
-        <div className="absolute top-3 left-3 z-20 bg-yellow-500/95 backdrop-blur-sm text-white px-2.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 shadow-lg">
+        <div className="absolute top-3 left-3 z-20 bg-yellow-500/95 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-sm font-bold flex items-center gap-1.5 shadow-lg">
           <span>⭐</span>
           <span>{series.rating}</span>
         </div>
 
         {/* Status Badge */}
-        <div className="absolute top-3 right-3 z-20 bg-green-500/95 backdrop-blur-sm text-white px-2.5 py-1.5 rounded-full text-xs font-semibold shadow-lg">
+        <div className="absolute top-3 right-3 z-20 bg-green-500/95 backdrop-blur-sm text-white px-3 py-2 rounded-full text-xs font-semibold shadow-lg">
           {series.status}
         </div>
 
@@ -36,7 +43,7 @@ export default function SeriesCard({ series, index = 0 }: CardProps) {
 
         {/* Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-end p-4 text-center">
-          <h3 className="font-bold text-white text-sm mb-3 line-clamp-2 group-hover:text-purple-300 transition-colors duration-300 w-full">
+          <h3 className="font-bold text-white text-sm mb-2 line-clamp-2 group-hover:text-purple-300 transition-colors duration-300 w-full">
             {series.title}
           </h3>
           
@@ -52,8 +59,8 @@ export default function SeriesCard({ series, index = 0 }: CardProps) {
           </div>
 
           {/* Action Button */}
-          <div className="mt-3 w-10 h-10 bg-purple-500/80 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 animate-scale-in transform group-hover:scale-110">
-            <span className="text-white text-sm">📖</span>
+          <div className="mt-3 w-12 h-12 bg-purple-500/80 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 animate-scale-in transform group-hover:scale-110">
+            <span className="text-white text-xl">📖</span>
           </div>
         </div>
       </div>
