@@ -1,6 +1,10 @@
-import NextAuth from "next-auth";
-import { auth } from "@/lib/auth";
+// This is a placeholder for NextAuth v5
+// Admin authentication will be implemented later
 
-const handler = NextAuth(auth);
+export async function GET() {
+  return Response.json({ message: "Admin authentication coming soon" });
+}
 
-export { handler as GET, handler as POST, handler as PUT, handler as DELETE };
+export async function POST() {
+  return Response.json({ message: "Admin authentication coming soon" });
+}
