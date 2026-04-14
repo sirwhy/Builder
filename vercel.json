@@ -3,11 +3,5 @@
   "outputDirectory": ".next",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "framework": "nextjs",
-  "rootDirectory": ".",
-  "env": {
-    "DATABASE_URL": "postgresql://user:password@localhost:5432/shinigami?schema=public",
-    "NEXTAUTH_SECRET": "your-secret-key-change-in-production",
-    "NEXTAUTH_URL": "https://builderer.vercel.app"
-  }
+  "framework": "nextjs"
 }
