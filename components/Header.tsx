@@ -22,26 +22,21 @@ export default function Header() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14">
-          {/* Logo */}
+        <div className="flex items-center justify-between h-12">
+          {/* Logo - Left */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center">
-              <span className="text-lg font-bold text-black">S</span>
-            </div>
-            <div>
-              <span className="text-lg font-bold text-white">SHINIGAMI</span>
-            </div>
+            <span className="text-white text-lg font-bold">SHINIGAMI</span>
           </Link>
           
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
+          {/* Navigation - Center */}
+          <div className="hidden md:flex items-center gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-3 py-1.5 text-sm font-medium rounded transition-colors ${
+                className={`text-sm font-medium transition-colors ${
                   isActive(link.href)
-                    ? 'text-white bg-gray-800'
+                    ? 'text-white'
                     : 'text-gray-400 hover:text-white'
                 }`}
               >
@@ -50,25 +45,22 @@ export default function Header() {
             ))}
           </div>
 
-          {/* Search & Auth */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Search & Auth - Right */}
+          <div className="hidden md:flex items-center gap-4">
             {/* Search Input */}
             <div className="relative">
               <input
                 type="search"
                 placeholder="Search..."
-                className="w-56 px-3 py-1.5 bg-gray-900 border border-gray-800 rounded text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500"
+                className="w-40 px-3 py-1.5 bg-gray-900 border border-gray-800 rounded text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gray-600"
               />
-              <svg className="absolute right-2.5 top-2.5 w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
             </div>
             
             {/* Auth Buttons */}
-            <button className="px-3 py-1.5 text-sm font-medium text-gray-400 hover:text-white transition-colors">
+            <button className="text-sm font-medium text-gray-400 hover:text-white transition-colors">
               Login
             </button>
-            <button className="px-4 py-1.5 text-sm font-semibold bg-white text-black rounded hover:bg-gray-200 transition-colors">
+            <button className="text-sm font-semibold bg-gray-800 text-white px-3 py-1.5 rounded hover:bg-gray-700 transition-colors">
               Sign Up
             </button>
           </div>
@@ -122,7 +114,7 @@ export default function Header() {
               <button className="w-full px-3 py-2 text-sm font-medium text-gray-400 text-left">
                 Login
               </button>
-              <button className="w-full px-3 py-2 text-sm font-semibold bg-white text-black rounded">
+              <button className="w-full px-3 py-2 text-sm font-semibold bg-gray-800 text-white rounded">
                 Sign Up
               </button>
             </div>
