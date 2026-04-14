@@ -51,25 +51,25 @@ function ReaderContent() {
   };
 
   return (
-    <div className="min-h-screen bg-black" onMouseMove={handleMouseMove}>
+    <div className="min-h-screen bg-white" onMouseMove={handleMouseMove}>
       {/* Header */}
-      <header className={`fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm border-b border-purple-500/20 transition-opacity ${showControls ? 'opacity-100' : 'opacity-0'}`}>
+      <header className={`fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 transition-opacity ${showControls ? 'opacity-100' : 'opacity-0'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <button
               onClick={() => router.push(`/series/${seriesId}`)}
-              className="flex items-center gap-2 text-gray-300 hover:text-purple-400 transition-colors"
+              className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors"
             >
               <span className="text-xl">←</span>
-              <span className="font-semibold">Back</span>
+              <span className="font-medium">Back</span>
             </button>
             
-            <h2 className="text-sm font-semibold text-white">
+            <h2 className="text-base font-semibold text-gray-900">
               Chapter {chapterId}
             </h2>
 
             <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-400">
+              <span className="text-sm text-gray-500">
                 {currentPage} / {totalPages}
               </span>
             </div>
@@ -84,12 +84,12 @@ function ReaderContent() {
           {Array.from({ length: 20 }, (_, i) => (
             <div
               key={i}
-              className="w-full aspect-[3/4] bg-gradient-to-br from-gray-900 to-gray-950 border-b border-purple-500/20"
+              className="w-full aspect-[3/4] bg-gradient-to-br from-gray-50 to-gray-100 border-b border-gray-200"
             >
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center text-gray-600">
+                <div className="text-center text-gray-400">
                   <div className="text-6xl mb-4">📖</div>
-                  <div className="text-lg font-semibold text-gray-500">
+                  <div className="text-lg font-semibold text-gray-300">
                     Page {i + 1 + (currentPage - 1) * 20}
                   </div>
                 </div>
@@ -100,19 +100,19 @@ function ReaderContent() {
       </div>
 
       {/* Navigation */}
-      <div className={`fixed bottom-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-t border-purple-500/20 transition-opacity ${showControls ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 transition-opacity ${showControls ? 'opacity-100' : 'opacity-0'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
             <button
               onClick={prevPage}
               disabled={currentPage === 1}
-              className="px-6 py-3 font-semibold text-white bg-gray-800 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-700 transition-all"
+              className="px-6 py-3 font-medium text-gray-700 bg-gray-100 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-200 transition-colors"
             >
               ← Prev
             </button>
 
             <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-400">
+              <span className="text-sm text-gray-500">
                 Page {currentPage} of {totalPages}
               </span>
             </div>
@@ -120,7 +120,7 @@ function ReaderContent() {
             <button
               onClick={nextPage}
               disabled={currentPage === totalPages}
-              className="px-6 py-3 font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-purple-500/25 transition-all"
+              className="px-6 py-3 font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
             >
               Next →
             </button>
@@ -133,7 +133,7 @@ function ReaderContent() {
 
 export default function Reader() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-black flex items-center justify-center text-white">Loading...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-white flex items-center justify-center text-gray-900">Loading...</div>}>
       <ReaderContent />
     </Suspense>
   );

@@ -32,24 +32,55 @@ export default function Browse() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-purple-950/20 to-gray-950 pt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold text-white mb-4">Browse Series</h1>
-          <p className="text-gray-400">Discover thousands of manhua and manhwa</p>
+    <div className="min-h-screen bg-gray-50">
+      {/* Navbar */}
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg">
+                <span className="text-white text-xl">📚</span>
+              </div>
+              <span className="text-xl font-bold text-gray-900">Shinigami Reader</span>
+            </Link>
+            
+            <div className="hidden md:flex items-center gap-8">
+              <Link href="/" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Home</Link>
+              <Link href="/browse" className="text-sm font-medium text-blue-600">Browse</Link>
+              <Link href="/latest" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Latest</Link>
+              <Link href="/popular" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Popular</Link>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                Login
+              </button>
+              <button className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:opacity-90 transition-opacity">
+                Sign Up
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Browse Series</h1>
+          <p className="text-gray-600">Discover thousands of manhua and manhwa</p>
         </div>
 
         {/* Genre Filter */}
-        <section className="mb-12">
-          <h2 className="text-xl font-semibold text-white mb-6">Genres</h2>
-          <div className="flex flex-wrap gap-3">
-            <button className="px-4 py-2 rounded-full bg-purple-600 text-white text-sm font-semibold">
+        <section className="mb-8">
+          <h2 className="text-sm font-semibold text-gray-700 mb-3">Genres</h2>
+          <div className="flex flex-wrap gap-2">
+            <button className="px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-medium">
               All ({series.length})
             </button>
             {genres.map((genre) => (
               <button
                 key={genre.name}
-                className="px-4 py-2 rounded-full bg-gray-800 text-gray-300 hover:bg-gray-700 text-sm font-semibold transition-colors"
+                className="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 text-sm font-medium transition-colors"
               >
                 {genre.name} ({genre.count})
               </button>
@@ -59,23 +90,25 @@ export default function Browse() {
 
         {/* Series Grid */}
         <section>
-          <h2 className="text-xl font-semibold text-white mb-6">All Series</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">All Series</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
             {series.map((s) => (
               <Link
                 key={s.id}
                 href={`/series/${s.id}`}
-                className="group relative aspect-[2/3] rounded-xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 hover:shadow-2xl hover:shadow-purple-500/20 transition-all hover:scale-105"
+                className="group"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-pink-500"></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent"></div>
-                <div className="absolute inset-0 flex items-end p-3">
-                  <div>
-                    <h3 className="font-bold text-white text-sm mb-1 line-clamp-2">{s.title}</h3>
-                    <div className="flex items-center gap-2 text-xs text-gray-300">
-                      <span>⭐ {s.rating}</span>
-                      <span>•</span>
-                      <span>{s.chapters} ch</span>
+                <div className="relative aspect-[2/3] rounded-xl overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300 shadow-sm group-hover:shadow-lg transition-shadow">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent"></div>
+                  <div className="absolute inset-0 flex items-end p-3">
+                    <div>
+                      <h3 className="font-semibold text-white text-xs mb-1 line-clamp-2">{s.title}</h3>
+                      <div className="flex items-center gap-1 text-[10px] text-gray-300">
+                        <span>⭐ {s.rating}</span>
+                        <span>•</span>
+                        <span>{s.chapters}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -86,7 +119,7 @@ export default function Browse() {
 
         {/* Load More */}
         <div className="mt-12 text-center">
-          <button className="px-8 py-4 text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:shadow-2xl hover:shadow-purple-500/25 transition-all">
+          <button className="px-8 py-3 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl hover:opacity-90 transition-opacity">
             Load More Series
           </button>
         </div>
