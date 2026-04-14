@@ -2,6 +2,7 @@ import Link from "next/link";
 
 export default function Browse() {
   const genres = [
+    { name: "All", count: 1234 },
     { name: "Action", count: 1234 },
     { name: "Adventure", count: 987 },
     { name: "Comedy", count: 756 },
@@ -32,30 +33,32 @@ export default function Browse() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Navbar */}
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-lg border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg">
-                <span className="text-white text-xl">📚</span>
+            <Link href="/" className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center">
+                <span className="text-xl">⚡</span>
               </div>
-              <span className="text-xl font-bold text-gray-900">Shinigami Reader</span>
+              <span className="text-2xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Shinigami
+              </span>
             </Link>
             
             <div className="hidden md:flex items-center gap-8">
-              <Link href="/" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Home</Link>
-              <Link href="/browse" className="text-sm font-medium text-blue-600">Browse</Link>
-              <Link href="/latest" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Latest</Link>
-              <Link href="/popular" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Popular</Link>
+              <Link href="/" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</Link>
+              <Link href="/browse" className="text-sm font-semibold text-indigo-400">Browse</Link>
+              <Link href="/latest" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Latest</Link>
+              <Link href="/popular" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Popular</Link>
             </div>
 
-            <div className="flex items-center gap-3">
-              <button className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+            <div className="flex items-center gap-4">
+              <button className="px-5 py-2 text-sm font-semibold text-gray-300 hover:text-white transition-colors">
                 Login
               </button>
-              <button className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:opacity-90 transition-opacity">
+              <button className="px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:opacity-90 transition-opacity">
                 Sign Up
               </button>
             </div>
@@ -64,23 +67,20 @@ export default function Browse() {
       </nav>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Browse Series</h1>
-          <p className="text-gray-600">Discover thousands of manhua and manhwa</p>
+          <h1 className="text-4xl font-bold text-white mb-2">Browse Series</h1>
+          <p className="text-gray-400">Discover thousands of manhua and manhwa</p>
         </div>
 
         {/* Genre Filter */}
-        <section className="mb-8">
-          <h2 className="text-sm font-semibold text-gray-700 mb-3">Genres</h2>
-          <div className="flex flex-wrap gap-2">
-            <button className="px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-medium">
-              All ({series.length})
-            </button>
+        <section className="mb-12">
+          <h2 className="text-sm font-semibold text-gray-400 mb-4">GENRES</h2>
+          <div className="flex flex-wrap gap-3">
             {genres.map((genre) => (
               <button
                 key={genre.name}
-                className="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 text-sm font-medium transition-colors"
+                className="px-5 py-2.5 rounded-full bg-gray-800/80 text-gray-300 hover:bg-indigo-600 hover:text-white text-sm font-medium transition-all border border-white/10"
               >
                 {genre.name} ({genre.count})
               </button>
@@ -90,7 +90,7 @@ export default function Browse() {
 
         {/* Series Grid */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">All Series</h2>
+          <h2 className="text-xl font-semibold text-white mb-6">All Series</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
             {series.map((s) => (
               <Link
@@ -98,14 +98,17 @@ export default function Browse() {
                 href={`/series/${s.id}`}
                 className="group"
               >
-                <div className="relative aspect-[2/3] rounded-xl overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300 shadow-sm group-hover:shadow-lg transition-shadow">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600"></div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent"></div>
+                <div className="relative aspect-[2/3] rounded-2xl overflow-hidden bg-gray-800 shadow-xl group-hover:shadow-2xl group-hover:shadow-purple-500/25 transition-all group-hover:scale-[1.02]">
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                   <div className="absolute inset-0 flex items-end p-3">
                     <div>
-                      <h3 className="font-semibold text-white text-xs mb-1 line-clamp-2">{s.title}</h3>
-                      <div className="flex items-center gap-1 text-[10px] text-gray-300">
-                        <span>⭐ {s.rating}</span>
+                      <h3 className="font-bold text-white text-sm mb-1 line-clamp-2">{s.title}</h3>
+                      <div className="flex items-center gap-2 text-xs text-gray-300">
+                        <span className="flex items-center gap-1">
+                          <span>⭐</span>
+                          <span>{s.rating}</span>
+                        </span>
                         <span>•</span>
                         <span>{s.chapters}</span>
                       </div>
@@ -119,7 +122,7 @@ export default function Browse() {
 
         {/* Load More */}
         <div className="mt-12 text-center">
-          <button className="px-8 py-3 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl hover:opacity-90 transition-opacity">
+          <button className="px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl hover:opacity-90 transition-all shadow-xl shadow-purple-500/25">
             Load More Series
           </button>
         </div>
