@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import api from '../utils/api';
+import { api } from '../utils';
 
 function Series() {
   const { id } = useParams();
