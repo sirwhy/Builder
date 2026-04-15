@@ -1,0 +1,8 @@
+version: 1
+
+services:
+  - type: web
+    name: client
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npx serve -s build -l $PORT
