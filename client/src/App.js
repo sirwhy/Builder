@@ -9,6 +9,8 @@ import Series from './pages/Series';
 import Reader from './pages/Reader';
 import AdminLogin from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
+import UserRegister from './pages/UserRegister';
+import UserLogin from './pages/UserLogin';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
             <Route path="/read/:id" element={<Reader />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/user/register" element={<UserRegister />} />
+            <Route path="/user/login" element={<UserLogin />} />
           </Routes>
         </main>
         <Footer />

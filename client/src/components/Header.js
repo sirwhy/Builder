@@ -1,9 +1,25 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('user');
+    setUser(null);
+    navigate('/');
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -52,12 +68,28 @@ function Header() {
               </svg>
             </form>
             
-            <Link to="/admin/login" className="text-sm font-medium text-slate-300 hover:text-white">
-              Login
-            </Link>
-            <Link to="/admin/login" className="btn-primary px-5 py-2 text-sm">
-              Sign Up
-            </Link>
+            {user ? (
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-slate-300">
+                  👋 {user.username || user.email}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 text-sm bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <>
+                <Link to="/user/login" className="text-sm font-medium text-slate-300 hover:text-white">
+                  Sign In
+                </Link>
+                <Link to="/user/register" className="px-5 py-2 text-sm bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-lg transition-colors">
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -103,12 +135,28 @@ function Header() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <Link to="/admin/login" className="text-sm font-medium text-slate-300 text-left">
-                Login
-              </Link>
-              <Link to="/admin/login" className="btn-primary px-4 py-2 text-sm text-center">
-                Sign Up
-              </Link>
+              {user ? (
+                <>
+                  <span className="px-4 py-2 text-sm text-slate-300">
+                    👋 {user.username || user.email}
+                  </span>
+                  <button
+                    onClick={handleLogout}
+                    className="px-4 py-2 text-sm bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors text-left"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/user/login" className="px-4 py-2 text-sm font-medium text-slate-300 text-left hover:text-white">
+                    Sign In
+                  </Link>
+                  <Link to="/user/register" className="px-4 py-2 text-sm bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-lg transition-colors text-center">
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         )}

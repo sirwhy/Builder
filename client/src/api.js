@@ -83,6 +83,47 @@ const api = {
     });
     return res.json();
   },
+
+  // User API
+  register: async (data) => {
+    const res = await fetch(`${API_URL}/users/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    return res.json();
+  },
+
+  userLogin: async (credentials) => {
+    const res = await fetch(`${API_URL}/users/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(credentials),
+    });
+    return res.json();
+  },
+
+  getCurrentUser: async (token) => {
+    const res = await fetch(`${API_URL}/users/me`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    return res.json();
+  },
+
+  getUserComments: async (token) => {
+    const res = await fetch(`${API_URL}/users/me/comments`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    return res.json();
+  },
 };
 
 export default api;

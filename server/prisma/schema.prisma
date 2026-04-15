@@ -54,11 +54,19 @@ model Page {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  role      String   @default("admin")
-  createdAt DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  password    String
+  role        String   @default("reader") // admin, reader, moderator
+  username    String?
+  avatar      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  comments    Comment[]
+  upvotes     Upvote[]
+  bookmarks   Bookmark[]
 }
 
 model Setting {
@@ -68,4 +76,52 @@ model Setting {
   updatedAt DateTime @updatedAt
 
   @@index([key])
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  chapterId Int
+  content   String
+  parentId  Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapter   Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  parent    Comment? @relation("CommentReplies", fields: [parentId], references: [id])
+  replies   Comment[] @relation("CommentReplies")
+  
+  @@index([userId])
+  @@index([chapterId])
+}
+
+model Upvote {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  chapterId Int
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapter   Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, chapterId])
+  @@index([userId])
+  @@index([chapterId])
+}
+
+model Bookmark {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  seriesId  Int
+  lastChapterId Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  series    Series   @relation(fields: [seriesId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, seriesId])
+  @@index([userId])
+  @@index([seriesId])
 }
