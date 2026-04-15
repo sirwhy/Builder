@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SeriesCard from '../components/SeriesCard';
-import { api } from '../utils';
+import { api } from '../api';
 
 function Browse() {
   const [searchParams, setSearchParams] = useSearchParams();
