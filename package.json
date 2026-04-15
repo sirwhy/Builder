@@ -9,8 +9,10 @@
     "install-all": "cd client && npm install && cd ../server && npm install",
     "build:client": "cd client && npm run build",
     "build:server": "cd server && npm run build",
+    "build": "npm run build:client && npm run build:server",
     "db:push": "cd server && npx prisma db push",
-    "db:studio": "cd server && npx prisma studio"
+    "db:studio": "cd server && npx prisma studio",
+    "deploy": "cd server && npx prisma generate && cd ../client && npm run build"
   },
   "dependencies": {},
   "devDependencies": {

@@ -141,6 +141,52 @@ shinigami-reader/
 
 ## Deployment
 
+### 🚀 Quick Deploy to Railway (Recommended)
+
+**Railway.app** - Free tier, easy deployment, built-in PostgreSQL
+
+1. **Push to GitHub:**
+   ```bash
+   git push origin main
+   ```
+
+2. **Deploy Backend:**
+   - Go to https://railway.app
+   - New Project → Deploy from GitHub repo
+   - Select: `sirwhy/Builder`
+   - Root Directory: `server`
+   - Environment Variables:
+     ```
+     DATABASE_URL=your-postgres-connection-string
+     JWT_SECRET=your-secret-key
+     PORT=5000
+     NODE_ENV=production
+     ```
+   - Railway auto-deploys! ✅
+
+3. **Deploy Frontend:**
+   - Add Service → Git
+   - Root Directory: `client`
+   - Railway auto-configures build commands
+   - Set `REACT_APP_API_URL` environment variable
+
+4. **Run Database Migration:**
+   ```bash
+   # In Railway terminal
+   cd server && npx prisma db push
+   ```
+
+5. **Create Admin User:**
+   ```bash
+   curl -X POST https://your-backend.railway.app/api/admin/register \
+     -H "Content-Type: application/json" \
+     -d '{"email":"admin@example.com","password":"admin123"}'
+   ```
+
+**See:** `RAILWAY_DEPLOYMENT.md` for detailed guide
+
+---
+
 ### VPS Deployment
 
 1. Build both client and server

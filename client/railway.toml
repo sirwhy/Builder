@@ -1,0 +1,9 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+numReplicas = 1
+sleepApplication = false
+deployCommand = "npm run build"
+publicRoutes = ["/"]
+startCommand = "npx serve -s build -l $PORT"
