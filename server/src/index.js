@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import seriesRoutes from './routes/series.js';
-import chapterRoutes from './routes/chapters.js';
-import adminRoutes from './routes/admin.js';
+import seriesRoutes from '../routes/series.js';
+import chapterRoutes from '../routes/chapters.js';
+import adminRoutes from '../routes/admin.js';
 
 dotenv.config();
 
