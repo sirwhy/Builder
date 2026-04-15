@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SeriesCard from '../components/SeriesCard';
-import api from '../api';
+import api from '../utils/api';
 
 function Home() {
   const [series, setSeries] = useState([]);
