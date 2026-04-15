@@ -2,6 +2,7 @@
 builder = "NIXPACKS"
 
 [deploy]
+preDeployCommand = "npx prisma migrate resolve --rolled-back 20240101000000_init && npx prisma migrate deploy"
 startCommand = "npm start"
 restartPolicyType = "ON_FAILURE"
 restartPolicyRetries = 5
